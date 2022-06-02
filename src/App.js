@@ -1,24 +1,40 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import './containers/ProductCard'
+import ProductCard from './containers/ProductCard';
+import SearchBar from './containers/searchBar/SearchBar';
+import axios from 'axios';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AddItem from './containers/addItem/AddItem';
+import Navbar from './containers/navbar/Navbar';
 
 function App() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios.get('https://warehouseapipower.herokuapp.com/product/')
+      .then(res => {
+        console.log(res.data);
+        setData(res.data);
+      })
+      .catch()
+
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        {/*  */}
+        <Routes>
+            <Route path="/" element={
+            <div>
+            <SearchBar data={data} />
+            </div>
+            } />
+            <Route path="/elguide/:elguide" element={<ProductCard />} />
+            <Route path="/additem" element={<AddItem/>} />
+          </Routes>
+      </div>
+    </Router>
   );
 }
 

@@ -1,0 +1,11 @@
+.parent__div {
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+.content__card {
+    display:flex;
+}
+
+.card {
+    display: flex;
+}
