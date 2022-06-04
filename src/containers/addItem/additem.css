@@ -8,7 +8,7 @@
     transform: translate(-50%,-50%);
     padding-bottom: 10px;
     box-shadow: rgba(255, 255, 255, 0.6) 20px 20px 20px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-
+    position: absolute;
 }
 
 .body h1 {
@@ -115,3 +115,72 @@
 .pass a:hover{
     color: #2691d9;
 }
+
+.search {
+
+    margin: 0 auto;
+    
+  }
+  
+  .searchInputs {
+      justify-content: center;
+      margin-top: 105px;
+      display: flex;
+    }
+    
+    .search input {
+      background-color: white;
+      border: 0;
+      border-radius: 2px;
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+      font-size: 18px;
+      padding: 15px;
+  
+      border-radius: 10px 0px 0px 10px;
+    }
+    
+    .searchIcon {
+      background-color: white;
+      display: grid;
+      place-items: center;
+      border-radius: 0px 10px 10px 0px;
+    }
+    
+    input:focus {
+      outline: none;
+    }
+    .searchIcon svg {
+      font-size: 35px;
+    }
+    
+    .dataResult {
+      margin-right: 10px;
+      padding-left: 10px;
+      background-color: white;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      width: 70%;
+      position: absolute;
+      max-height: 300px ;
+      z-index: 10;
+    }
+    
+    .dataResult::-webkit-scrollbar {
+      display: none;
+    }
+    
+    
+    .dataItem p {
+      margin-left: 100px;
+    }
+    a {
+      text-decoration: none;
+    }
+    
+    a:hover {
+      background-color: lightgrey;
+    }
+    
+    #clearBtn {
+      cursor: pointer;
+    }
