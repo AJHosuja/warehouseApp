@@ -15,7 +15,7 @@ const Navbar = () => {
         <>
             <CNavbar expand="lg" colorScheme="light" className="bg-light">
                 <CContainer fluid>
-                    <CNavbarBrand href="#">WareHouse-APP</CNavbarBrand>
+                    <CNavbarBrand href="/">WareHouse-APP</CNavbarBrand>
                     <CNavbarToggler onClick={() => setVisible(!visible)} />
                     <CCollapse className="navbar-collapse" visible={visible}>
                         <CNavbarNav>
@@ -28,7 +28,7 @@ const Navbar = () => {
                             <Link to="/additem" activeClassName="active" style={{ textDecoration: 'none'  ,color: "black" }}>Lisää tuote</Link>
                             </CNavLink>
                             <CNavLink active>
-                            <Link to="/additem" activeClassName="active" style={{ textDecoration: 'none' ,color: "black" }}>Inventoi</Link>
+                            <Link to="/inventory" activeClassName="active" style={{ textDecoration: 'none' ,color: "black" }}>Inventoi</Link>
                             </CNavLink>
                         </CNavbarNav>
 

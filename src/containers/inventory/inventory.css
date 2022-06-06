@@ -1,0 +1,28 @@
+.parent__div {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 10px;
+    margin: 10px;
+    gap: 10px;
+}
+
+.button__group__1 {
+    margin-top: 10px;
+}
+
+.button__group__2 {
+    margin-top: 10px;
+}
+
+.button__group__3 {
+    margin-top: 10px;
+}
+
+.addItem {
+    margin-top: 11px;
+}
+
+label {
+    margin-top: 11px;
+}

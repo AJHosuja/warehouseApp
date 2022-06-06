@@ -37,7 +37,7 @@ function SearchBar({ data }) {
           {wordGot.length === 0 ? (<SearchIcon />) : (<CloseIcon id="clearBtn" onClick={clearSearch} />)}
         </div>
       </div>
-      {filteredData.length != 0 && (
+      {filteredData.length !== 0 && (
         <div className="dataResult">
           {filteredData.map((result, key) => {
             return (

@@ -7,6 +7,7 @@ import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddItem from './containers/addItem/AddItem';
 import Navbar from './containers/navbar/Navbar';
+import { Inventory } from './containers/inventory/Inventory';
 //"start": "node server/server.js",
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
       })
       .catch()
 
-  });
+  },[]);
   return (
     <Router>
       <div className="App">
@@ -39,6 +40,7 @@ function App() {
             } />
             <Route path="/elguide/:elguide" element={<ProductCard />} />
             <Route path="/additem" element={<AddItem data={eanElguideData}/>} />
+            <Route path="/inventory" element={<Inventory/>} />
           </Routes>
       </div>
     </Router>
