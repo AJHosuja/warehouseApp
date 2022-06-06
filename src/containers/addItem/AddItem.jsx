@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useAlert } from "react-alert"
 
 import './additem.css'
 
@@ -8,6 +9,7 @@ const AddItem = ({ data }) => {
     const [elguide, setElguide] = useState("");
     const [ean, setEan] = useState("");
     const [rack, setRack] = useState("");
+    const alert = useAlert();
 
     const clickHandlerGuide = (e) => {
         const searchWord = e.target.value;
@@ -47,9 +49,7 @@ const AddItem = ({ data }) => {
         params.append('elguideCode', elguide)
         params.append('rack', rack)
         params.append('updater', 'anvi05')
-
         
-
         const config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -57,13 +57,16 @@ const AddItem = ({ data }) => {
         }
 
         axios.post('https://warehouseapipower.herokuapp.com/product/', params, config)
-            .then((result) => {
-                console.log(result)
-            })
+        .then((result) => {
+            console.log(result)
+            alert.show("Onnistui");        
+        })
             .catch((err) => {
+                alert.show("Epäonnistui");        
+            
                 // Do somthing
             })
-    }
+        }
     return (
         <div className='body'>
             <h1>Lisää tuote</h1>

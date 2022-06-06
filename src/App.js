@@ -27,7 +27,7 @@ function App() {
       })
       .catch()
 
-  },[]);
+  });
   return (
     <Router>
       <div className="App">
