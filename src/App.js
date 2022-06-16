@@ -55,8 +55,6 @@ function App() {
             <Routes>
               <Route path="/" element={
                 <div>
-                  <p>{userNameStored}</p>
-                  <p>{tokenStored}</p>
 
                   <SearchBar token={tokenStored} />
 
