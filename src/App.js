@@ -12,8 +12,6 @@ import Login from './containers/login/Login';
 //"start": "node server/server.js",
 //https://warehouseapipower.herokuapp.com
 function App() {
-  const [data, setData] = useState([]);
-  const [eanElguideData, setEanElguideData] = useState([]);
   const [logged, setLogged] = useState(false);
 
   const userIDStored = localStorage.getItem("userID")
@@ -23,33 +21,31 @@ function App() {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-
     if (tokenStored && userNameStored && userIDStored) {
-      setLogged(true);
-      setUserName(userNameStored);
-    }
-
-    const config = {
-      headers: {
-        'Authorization': `Basic ${tokenStored}`
+      const config = {
+        headers: {
+          'Authorization': `Basic ${tokenStored}`
+        }
       }
+
+      const tokenCheckURL = process.env.REACT_APP_APIURL + '/token'
+      axios.get(tokenCheckURL, config)
+        .then(res => {
+          console.log(res)
+          setLogged(true);
+          setUserName(userNameStored);
+        }).catch(err => {
+          setLogged(false);
+          localStorage.removeItem("userID")
+          localStorage.removeItem("token")
+          localStorage.removeItem("userName")
+        })
+
     }
-
-    const url = process.env.REACT_APP_APIURL + '/product/';
-    axios.get(url, config)
-      .then(res => {
-        setData(res.data);
-      })
-      .catch()
-
-    const urlRequest2 = process.env.REACT_APP_APIURL + '/product/eanelguide'
-    axios.get(urlRequest2, config)
-      .then(res => {
-        setEanElguideData(res.data);
-      })
-      .catch()
 
   });
+
+
   return (
     <Router>
       <div className="App">
@@ -61,14 +57,14 @@ function App() {
                 <div>
                   <p>{userNameStored}</p>
                   <p>{tokenStored}</p>
-                  
-                  <SearchBar data={data} />
+
+                  <SearchBar token={tokenStored} />
 
                 </div>
               } />
               <Route path="/elguide/:elguide" element={<ProductCard token={tokenStored} />} />
-              <Route path="/additem" element={<AddItem data={eanElguideData} userID={userNameStored} token={tokenStored} />} />
-              <Route path="/inventory" element={<Inventory token={tokenStored}/>} />
+              <Route path="/additem" element={<AddItem userID={userNameStored} token={tokenStored} />} />
+              <Route path="/inventory" element={<Inventory token={tokenStored} userName={userNameStored} />} />
             </Routes>
           </div> : <Login setLogged={setLogged} />}
       </div>

@@ -6,9 +6,10 @@ import CardActions from '@mui/material/CardActions';
 import './inventory.css'
 import ItemCard from '../ItemCards/ItemCard';
 import AddItem from '../addItem/AddItem';
+import { addPointerEvent } from 'framer-motion';
 
 
-export const Inventory = ({ token }) => {
+export const Inventory = ({ token, userName }) => {
     const [rack, setRack] = useState("");
     const [rackGap, setRackGap] = useState("");
     const [rackSpot, setRackSpot] = useState("");
@@ -33,7 +34,7 @@ export const Inventory = ({ token }) => {
             })
             .catch()
 
-    }, []);
+    });
 
 
     return (
@@ -69,11 +70,11 @@ export const Inventory = ({ token }) => {
             </div>
             <label >{rack + rackGap + rackSpot}</label>
             <div className='addItem'>
-            <Button variant="secondary" onClick={() => { setAddItemBool(false)}}>Add Item</Button>
+            <Button variant="secondary" onClick={() => { setAddItemBool(!addItemBool)}}>Add Item</Button>
             </div>
             <div>
                 {addItemBool &&
-                <AddItem ChangeRack={rack+rackGap+rackSpot}/>
+                <AddItem ChangeRack={rack+rackGap+rackSpot} token={token} userID={userName}/>
                 }
             </div>
             <div>

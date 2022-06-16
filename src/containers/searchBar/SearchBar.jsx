@@ -1,15 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./searchBar.css";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
+import axios from 'axios';
 import {
   BrowserRouter as Router,
   Link
 } from "react-router-dom";
 
-function SearchBar({ data }) {
+function SearchBar({ token }) {
+  const [data , setData] = useState([]);
   const [filteredData, setFiltereData] = useState([]);
   const [wordGot, setWordGot] = useState("");
+
+  useEffect(() => {
+    const config = {
+      headers: {
+        'Authorization': `Basic ${token}`
+      }
+    }
+
+    const url = process.env.REACT_APP_APIURL + '/product/';
+    axios.get(url, config)
+      .then(res => {
+        setData(res.data);
+      })
+      .catch()
+  })
 
   const clickHandler = (e) => {
     const searchWord = e.target.value;

@@ -1,15 +1,31 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useAlert } from "react-alert"
-
+import axios from 'axios';
 import './additem.css'
 
-const AddItem = ({ data, userID, token, ChangeRack }) => {
+const AddItem = ({ userID, token, ChangeRack }) => {
     const [filteredData, setFiltereData] = useState([]);
     const [elguide, setElguide] = useState("");
     const [ean, setEan] = useState("");
     const [rack, setRack] = useState(ChangeRack);
+    const [data, setData] = useState([]);
     const alert = useAlert();
+
+    useEffect(() => {
+        const config = {
+            headers: {
+                'Authorization': `Basic ${token}`
+            }
+        }
+
+        const urlRequest = process.env.REACT_APP_APIURL + '/product/eanelguide'
+        axios.get(urlRequest, config)
+            .then(res => {
+                setData(res.data);
+            })
+            .catch()
+    })
+
 
     const clickHandlerGuide = (e) => {
         const searchWord = e.target.value;
@@ -54,27 +70,27 @@ const AddItem = ({ data, userID, token, ChangeRack }) => {
         params.append('productEAN', ean)
         params.append('rack', rack)
         params.append('updater', userID)
-        
+
         const config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': `Basic ${token}`
             }
         }
-        
+
         const addItemURL = process.env.REACT_APP_APIURL + '/product/';
         axios.post(addItemURL, params, config)
-        .then((result) => {
-            console.log(result)
-            alert.show("Onnistui");        
-        })
-        .catch((err) => {
-            console.log(err)
-            alert.show("Epäonnistui");
+            .then((result) => {
+                console.log(result)
+                alert.show("Onnistui");
             })
-        }
+            .catch((err) => {
+                console.log(err)
+                alert.show("Epäonnistui");
+            })
+    }
     return (
-        <div className='body'>
+        <div className="additem__parent__div">
             <h1>Lisää tuote</h1>
             <form onSubmit={addIem}>
                 <div className='txt_field'>
