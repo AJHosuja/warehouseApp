@@ -6,11 +6,23 @@ import {
 import {
     BrowserRouter as Router,
     Link
-  } from "react-router-dom";
+} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
+import './navbar.css'
+import Button from '@mui/material/Button';
 
-const Navbar = () => {
+
+
+const Navbar = ({ setLogged }) => {
     const [visible, setVisible] = useState(false)
+
+    const logOut = () => {
+        setLogged(false);
+        localStorage.removeItem("userID")
+        localStorage.removeItem("token")
+        localStorage.removeItem("userName")
+    }
+
     return (
         <>
             <CNavbar expand="lg" colorScheme="light" className="bg-light">
@@ -21,17 +33,19 @@ const Navbar = () => {
                         <CNavbarNav>
                             <CNavItem>
                                 <CNavLink active>
-                                    <Link to="/" activeClassName="active" style={{ textDecoration: 'none' ,color: "black"  }}>Koti</Link>
+                                    <Link to="/" activeClassName="active" style={{ textDecoration: 'none', color: "black" }} onClick={() => setVisible(!visible)}>Koti</Link>
                                 </CNavLink>
                             </CNavItem>
                             <CNavLink active>
-                            <Link to="/additem" activeClassName="active" style={{ textDecoration: 'none'  ,color: "black" }}>Lisää tuote</Link>
+                                <Link to="/additem" activeClassName="active" style={{ textDecoration: 'none', color: "black" }} onClick={() => setVisible(!visible)}>Lisää tuote</Link>
                             </CNavLink>
                             <CNavLink active>
-                            <Link to="/inventory" activeClassName="active" style={{ textDecoration: 'none' ,color: "black" }}>Inventoi</Link>
+                                <Link to="/inventory" activeClassName="active" style={{ textDecoration: 'none', color: "black" }} onClick={() => setVisible(!visible)}>Inventoi</Link>
                             </CNavLink>
+                            <div className='log__out'>
+                                <Button variant="contained" onClick={logOut}>Kirjaudu ulos</Button>
+                            </div>
                         </CNavbarNav>
-
                     </CCollapse>
                 </CContainer>
             </CNavbar>

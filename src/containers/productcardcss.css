@@ -9,3 +9,7 @@
 .card {
     display: flex;
 }
+
+.card__buttons {
+    justify-content: space-between;
+}

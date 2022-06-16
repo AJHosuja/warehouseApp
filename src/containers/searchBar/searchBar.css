@@ -1,69 +1,76 @@
-.search {
-
+.search__searchbar {
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
-  
+  justify-content: center;
+  align-items: center;
+
 }
 
-.searchInputs {
-    justify-content: center;
-    margin-top: 105px;
-    display: flex;
-  }
-  
-  .search input {
-    background-color: white;
-    border: 0;
-    border-radius: 2px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    font-size: 18px;
-    padding: 15px;
+.searchInputs__searchbar {
+  justify-content: center;
+  margin-top: 105px;
+  display: flex;
+}
 
-    border-radius: 10px 0px 0px 10px;
-  }
-  
-  .searchIcon {
-    background-color: white;
-    display: grid;
-    place-items: center;
-    border-radius: 0px 10px 10px 0px;
-  }
-  
-  input:focus {
-    outline: none;
-  }
-  .searchIcon svg {
-    font-size: 35px;
-  }
-  
-  .dataResult {
-    margin-top: 5px;
-    margin-left: 50px;
-    margin-right: 50px;
-    padding-left: 10px;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    overflow: hidden;
-    overflow-y: auto;
-    align-items: center;
-  }
-  
-  .dataResult::-webkit-scrollbar {
-    display: none;
-  }
-  
-  
-  .dataItem p {
-    margin-left: 100px;
-  }
-  a {
-    text-decoration: none;
-  }
-  
-  a:hover {
-    background-color: lightgrey;
-  }
-  
-  #clearBtn {
-    cursor: pointer;
-  }
+.searchInputs__searchbar input {
+  max-width: 350px;
+  min-width: 300px;
+  background-color: white;
+  border: 0;
+  border-radius: 2px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  font-size: 18px;
+  padding: 15px;
+
+  border-radius: 10px 0px 0px 10px;
+}
+
+.searchIcon__searchbar {
+  background-color: white;
+  display: grid;
+  place-items: center;
+  border-radius: 0px 10px 10px 0px;
+}
+
+input:focus {
+  outline: none;
+}
+
+.searchIcon svg {
+  font-size: 35px;
+}
+
+.dataResult__searchbar {
+  max-width: 350px;
+  min-width: 300px;
+  max-height: 200px;
+  padding-left: 10px;
+  padding-top: 5px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.dataResult__searchbar::-webkit-scrollbar {
+  display: none;
+}
+
+
+.dataItem p {
+  margin-left: 100px;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: lightgrey;
+}
+
+#clearBtn {
+  cursor: pointer;
+}

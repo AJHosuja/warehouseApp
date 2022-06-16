@@ -4,18 +4,29 @@ import axios from 'axios';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import './inventory.css'
+import ItemCard from '../ItemCards/ItemCard';
+import AddItem from '../addItem/AddItem';
 
 
-export const Inventory = () => {
+export const Inventory = ({ token }) => {
     const [rack, setRack] = useState("");
     const [rackGap, setRackGap] = useState("");
     const [rackSpot, setRackSpot] = useState("");
     const [data, setData] = useState([]);
-    const url = "https://warehouseapipower.herokuapp.com/product/all/";
-
+    const [addItemBool, setAddItemBool] = useState(false);
+    
+    const url = process.env.REACT_APP_APIURL + "/product/all/";
+    
     useEffect(() => {
+        
+        const config = {
+            headers: {
+                'Authorization': `Basic ${token}`
+            }
+        }
+
         console.log(url)
-        axios.get(url)
+        axios.get(url, config)
             .then(res => {
                 console.log(res.data);
                 setData(res.data);
@@ -24,23 +35,6 @@ export const Inventory = () => {
 
     }, []);
 
-
-    function deleteItem(id) {
-        console.log(id);
-        const deleteUrl = 'https://warehouseapipower.herokuapp.com/product/' + id;
-        axios.delete(deleteUrl)
-          .then(res => {
-            console.log(res.data);
-            axios.get(url)
-              .then(res => {
-                console.log(res.data);
-                setData(res.data);
-              })
-              .catch()
-          })
-          .catch()
-    
-      }
 
     return (
         <div className='parent__div'>
@@ -75,16 +69,27 @@ export const Inventory = () => {
             </div>
             <label >{rack + rackGap + rackSpot}</label>
             <div className='addItem'>
-            <Button variant="secondary">Add Item</Button>
+            <Button variant="secondary" onClick={() => { setAddItemBool(false)}}>Add Item</Button>
+            </div>
+            <div>
+                {addItemBool &&
+                <AddItem ChangeRack={rack+rackGap+rackSpot}/>
+                }
             </div>
             <div>
                 {data.map((data1) => {
-                    const data2 = rack + rackGap + rackSpot;
-                    console.log(data1)
                     if( data1.rack=== rack + rackGap + rackSpot){
-                        console.log("täällä");
+                        console.log(data1)
                     return (
-                        <Card sx={{ minWidth: 275, justifyContent: 'center', textAlign: 'center', marginTop: '1rem' }}>
+                        <ItemCard itemData={data1} token={token}/>
+                    )}
+                })}
+            </div>
+        </div>
+    )
+}
+
+{/*<Card sx={{ minWidth: 275, justifyContent: 'center', textAlign: 'center', marginTop: '1rem' }}>
                             <p>ean <strong>{data1.productEAN}</strong></p>
                             <p>elguide: <strong>{data1.elguideCode}</strong></p>
                             <p>Hylly: <strong>{data1.rack}</strong></p>
@@ -92,10 +97,4 @@ export const Inventory = () => {
                             <CardActions>
                                 <Button onClick={() => deleteItem(data1.id)} size="small">Delete</Button>
                             </CardActions>
-                        </Card>
-                    )}
-                })}
-            </div>
-        </div>
-    )
-}
+                        </Card>*/}

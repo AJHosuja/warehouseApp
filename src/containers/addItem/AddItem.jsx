@@ -4,11 +4,11 @@ import { useAlert } from "react-alert"
 
 import './additem.css'
 
-const AddItem = ({ data }) => {
+const AddItem = ({ data, userID, token, ChangeRack }) => {
     const [filteredData, setFiltereData] = useState([]);
     const [elguide, setElguide] = useState("");
     const [ean, setEan] = useState("");
-    const [rack, setRack] = useState("");
+    const [rack, setRack] = useState(ChangeRack);
     const alert = useAlert();
 
     const clickHandlerGuide = (e) => {
@@ -26,6 +26,10 @@ const AddItem = ({ data }) => {
 
     const clickHandlerRack = (e) => {
         setRack(e.target.value)
+    }
+
+    const clickHandlerEan = (e) => {
+        setEan(e.target.value)
     }
     const dataClicked = (e) => {
         console.log(e)
@@ -47,24 +51,26 @@ const AddItem = ({ data }) => {
         e.preventDefault();
         const params = new URLSearchParams()
         params.append('elguideCode', elguide)
+        params.append('productEAN', ean)
         params.append('rack', rack)
-        params.append('updater', 'anvi05')
+        params.append('updater', userID)
         
         const config = {
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `Basic ${token}`
             }
         }
-
-        axios.post('https://warehouseapipower.herokuapp.com/product/', params, config)
+        
+        const addItemURL = process.env.REACT_APP_APIURL + '/product/';
+        axios.post(addItemURL, params, config)
         .then((result) => {
             console.log(result)
             alert.show("Onnistui");        
         })
-            .catch((err) => {
-                alert.show("Epäonnistui");        
-            
-                // Do somthing
+        .catch((err) => {
+            console.log(err)
+            alert.show("Epäonnistui");
             })
         }
     return (
@@ -80,7 +86,7 @@ const AddItem = ({ data }) => {
                     <label>Elguide Code</label>
                 </div>
                 {filteredData.length != 0 && (
-                    <div className="dataResult">
+                    <div className="dataResult__add__item">
                         {filteredData.slice(0, 20).map((result, key) => {
                             return (
                                 <p onClick={() => dataClicked(result.elguide)}>
@@ -93,6 +99,7 @@ const AddItem = ({ data }) => {
                 <div className='txt_field'>
                     <input type="text"
                         value={ean}
+                        onChange={clickHandlerEan}
                         required></input>
                     <span></span>
                     <label>EAN</label>
