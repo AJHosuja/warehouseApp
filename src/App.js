@@ -22,18 +22,6 @@ function App() {
 
   const [userName, setUserName] = useState("");
 
-  const [seconds, setSeconds] = useState(0);
-  const [isActive, setIsActive] = useState(false);
-
-  function toggle() {
-    setIsActive(!isActive);
-  }
-
-  function reset() {
-    setSeconds(0);
-    setIsActive(false);
-  }
-
   useEffect(() => {
 
     if (tokenStored && userNameStored && userIDStored) {
@@ -71,6 +59,9 @@ function App() {
             <Routes>
               <Route path="/" element={
                 <div>
+                  <p>{userNameStored}</p>
+                  <p>{tokenStored}</p>
+                  
                   <SearchBar data={data} />
 
                 </div>
