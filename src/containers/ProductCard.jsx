@@ -45,24 +45,3 @@ const ProductCard = ({ token }) => {
 }
 
 export default ProductCard
-
-
-{/*<Card sx={{ minWidth: 275, justifyContent: 'center', textAlign: 'center', marginTop: '1rem' }}>
-            <p>ean <strong>{data1.productEAN}</strong></p>
-            <p>elguide: <strong>{data1.elguideCode}</strong></p>
-            
-            {!updateRack ?
-              <p>Hylly: <strong>{data1.rack}</strong></p>
-              : <p>uusi hylly: <input type="text" style={{width: "80px"}} />
-                <Button onClick={() => changeRack(data1.id)} size="small">Päivitä</Button></p>}
-
-            <p>Lisääjä: <strong>{data1.updater}</strong></p>
-            <CardActions className='card__buttons'>
-              <Button onClick={() => deleteItem(data1.id)} size="small">Poista</Button>
-              {!updateRack ?
-              <Button onClick={() => setUpdateRack(!updateRack)} size="small">Vaihda hyllyä</Button>
-              : 
-              <Button onClick={() => setUpdateRack(!updateRack)} size="small">Peruuta</Button>
-              }
-            </CardActions>
-          </Card>*/}
