@@ -1,3 +1,3 @@
-## Warehouse Inventory APP made for small warehouses
+### Warehouse Inventory APP made for small warehouses
 
-#Screenshots
+##Screenshots
