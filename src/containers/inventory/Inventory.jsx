@@ -89,13 +89,3 @@ export const Inventory = ({ token, userName }) => {
         </div>
     )
 }
-
-{/*<Card sx={{ minWidth: 275, justifyContent: 'center', textAlign: 'center', marginTop: '1rem' }}>
-                            <p>ean <strong>{data1.productEAN}</strong></p>
-                            <p>elguide: <strong>{data1.elguideCode}</strong></p>
-                            <p>Hylly: <strong>{data1.rack}</strong></p>
-                            <p>Lisääjä: <strong>{data1.updater}</strong></p>
-                            <CardActions>
-                                <Button onClick={() => deleteItem(data1.id)} size="small">Delete</Button>
-                            </CardActions>
-                        </Card>*/}
